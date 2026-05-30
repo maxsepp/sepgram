@@ -85,7 +85,10 @@ class MessageEntity(Object):
             entity_type = enums.MessageEntityType.TEXT_MENTION
             user_id = entity.user_id.user_id
         else:
-            entity_type = enums.MessageEntityType(entity.__class__)
+            try:
+                entity_type = enums.MessageEntityType(entity.__class__)
+            except ValueError:
+                return None
             user_id = getattr(entity, "user_id", None)
 
         return MessageEntity(
