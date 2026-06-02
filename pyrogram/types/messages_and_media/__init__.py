@@ -63,6 +63,8 @@ from .star_gift import StarGift
 from .saved_star_gift import SavedStarGift
 from .stars_transaction import StarsTransaction
 from .stars_status import StarsStatus
+from .sent_guest_message import SentGuestMessage
+from .sent_guest_message import SentGuestMessage
 
 __all__ = [
     "Animation", "Audio", "AvailableEffect", "BoostsStatus", "Contact", "Document", "ExternalReplyInfo", "ForumTopic", "ForumTopicCreated",
@@ -72,4 +74,5 @@ __all__ = [
     "StickerSet", "Venue", "Video", "VideoNote", "Voice", "WebPage", "Dice", "Reaction", "WebAppData",
     "MessageReactions", "MessageStory", "MyBoost",
     "StarGiftAttribute", "StarGift", "SavedStarGift", "StarsTransaction", "StarsStatus",
+    "SentGuestMessage",
 ]

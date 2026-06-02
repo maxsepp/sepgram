@@ -201,8 +201,8 @@ class User(Object, Update):
         reply_color: "types.ChatColor" = None,
         profile_color: "types.ChatColor" = None,
         active_users: int = None,
-        frozen_icon: int = None
-        
+        frozen_icon: int = None,
+        supports_guest_queries: bool = None
     ):
         super().__init__(client)
 
@@ -219,6 +219,7 @@ class User(Object, Update):
         self.is_fake = is_fake
         self.is_support = is_support
         self.is_premium = is_premium
+        self.supports_guest_queries = supports_guest_queries
         self.is_contacts_only = is_contacts_only
         self.first_name = first_name
         self.last_name = last_name

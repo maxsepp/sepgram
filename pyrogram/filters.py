@@ -970,3 +970,5 @@ class chat(Filter, set):
                          and message.from_user
                          and message.from_user.is_self
                          and not message.outgoing)))
+
+guest_message = create(lambda _, __, m: bool(getattr(m, "guest_query_id", None)))

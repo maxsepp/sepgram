@@ -17,6 +17,7 @@
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
 from .answer_callback_query import AnswerCallbackQuery
+from .answer_guest_query import AnswerGuestQuery
 from .answer_inline_query import AnswerInlineQuery
 from .answer_web_app_query import AnswerWebAppQuery
 from .delete_bot_commands import DeleteBotCommands
@@ -38,6 +39,7 @@ from .update_star_ref_program import UpdateStarRefProgram
 
 
 class Bots(
+    AnswerGuestQuery,
     AnswerCallbackQuery,
     AnswerInlineQuery,
     GetInlineBotResults,

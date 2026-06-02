@@ -464,7 +464,10 @@ class Message(Object, Update):
             "types.ReplyKeyboardRemove",
             "types.ForceReply"
         ] = None,
-        reactions: List["types.Reaction"] = None
+        reactions: List["types.Reaction"] = None,
+        guest_bot_caller_user: "types.User" = None,
+        guest_bot_caller_chat: "types.Chat" = None,
+        guest_query_id: int = None
     ):
         super().__init__(client)
 
@@ -558,6 +561,9 @@ class Message(Object, Update):
         self.web_app_data = web_app_data
         self.giveaway_launched = giveaway_launched
         self.reactions = reactions
+        self.guest_bot_caller_user = guest_bot_caller_user
+        self.guest_bot_caller_chat = guest_bot_caller_chat
+        self.guest_query_id = guest_query_id
 
     async def wait_for_click(
         self,
@@ -1030,6 +1036,8 @@ class Message(Object, Update):
                 outgoing=message.out,
                 reply_markup=reply_markup,
                 reactions=reactions,
+                guest_bot_caller_user=types.User._parse(client, users.get(getattr(getattr(message, "guestchat_via_from", None), "user_id", None), None)) if isinstance(getattr(message, "guestchat_via_from", None), raw.types.PeerUser) else None,
+                guest_bot_caller_chat=types.Chat._parse_chat(client, chats.get(getattr(getattr(message, "guestchat_via_from", None), "channel_id", getattr(getattr(message, "guestchat_via_from", None), "chat_id", None)), None)) if not isinstance(getattr(message, "guestchat_via_from", None), raw.types.PeerUser) and getattr(message, "guestchat_via_from", None) else None,
                 client=client
             )
 
