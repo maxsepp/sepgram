@@ -16,11 +16,50 @@
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
+from . import types, functions, base, core
+from .all import objects as _objects_raw
+
 from importlib import import_module
 
-from . import types, functions, base, core
-from .all import objects
 
-for k, v in objects.items():
-    path, name = v.rsplit(".", 1)
-    objects[k] = getattr(import_module(path), name)
+class _LazyObjects:
+    def __init__(self, data):
+        self._data = data
+
+    def _resolve(self, k):
+        v = self._data[k]
+        if isinstance(v, str):
+            path, name = v.rsplit(".", 1)
+            obj = getattr(import_module(path), name)
+            self._data[k] = obj
+            return obj
+        return v
+
+    def __getitem__(self, k):
+        return self._resolve(k)
+
+    def __setitem__(self, k, v):
+        self._data[k] = v
+
+    def __contains__(self, k):
+        return k in self._data
+
+    def __iter__(self):
+        return iter(self._data)
+
+    def keys(self):
+        return self._data.keys()
+
+    def values(self):
+        return (self._resolve(k) for k in self._data)
+
+    def items(self):
+        return ((k, self._resolve(k)) for k in self._data)
+
+    def get(self, k, default=None):
+        if k in self._data:
+            return self._resolve(k)
+        return default
+
+
+objects = _LazyObjects(_objects_raw)
