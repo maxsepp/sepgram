@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://github.com/iyann1255/sepgram">
+    <a href="https://github.com/maxsepp/sepgram">
         <img src="https://docs.pyrogram.org/_static/pyrogram.png" alt="Sepgram" width="128">
     </a>
     <br>
@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/iyann1255/sepgram">
+    <a href="https://github.com/maxsepp/sepgram">
         GitHub
     </a>
     •
@@ -45,7 +45,7 @@ app.run()
 ## Installation
 
 ```bash
-pip install git+https://github.com/iyann1255/sepgram
+pip install git+https://github.com/maxsepp/sepgram
 ```
 
 ---
